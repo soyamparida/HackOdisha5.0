@@ -12,7 +12,7 @@ const Dashboard = () => {
           <ul className="space-y-4 text-left pl-2">
           <li className="mb-6 text-center">
               <Link to="/lost-report" className="cursor-pointer hover:text-green-500 duration-400 ease-in-out">
-             
+                Lost Reports
               </Link>
             </li>
             <li className="mb-6 text-center">
