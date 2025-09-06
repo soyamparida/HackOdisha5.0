@@ -38,10 +38,7 @@ const AdminLogin = () => {
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 border rounded-md"
           />
-          <button 
-            type="submit"
-            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition"
-          >
+          
             Login
           </button>
         </form>
