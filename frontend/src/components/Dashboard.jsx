@@ -21,14 +21,14 @@ const Dashboard = () => {
               </Link>
             </li>
             <li className="hover:text-yellow-300 cursor-pointer">Dashboard</li>
-            <li className="hover:text-yellow-200 cursor-pointer">
-              Matched Reports
+            <li className="hover:text-yellow-300 cursor-pointer">
+          
             </li>
             <li className="hover:text-yellow-300 cursor-pointer">
               Unmatched Item
             </li>
             <li className="hover:text-yellow-300 cursor-pointer">Users</li>
-            <li className="hover:text-yellow-300 cursor-pointer">Settings</li>
+            <li className="hover:text-yellow-500 cursor-pointer">Settings</li>
           </ul>
         </div>
 
