@@ -11,7 +11,10 @@ const itemSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    createdAt: { type: Date, default: Date.now },
+    imageUrl: { type: String, required: true},
+    Id_card: { type: String, required: true},
+    Date: { type: Date, default: Date.now },
+    category: { type: String, default: 'general' },
 });
 
 const Item = mongoose.model("Item", itemSchema);
