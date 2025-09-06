@@ -78,3 +78,38 @@ export const uploadItem = async (req, res) => {
     res.status(500).json({ error: 'Failed to upload item' });
   }
 };
+
+//User - update item
+export const updateItem = async (req, res) => {
+  try {
+    const item = await Item.findById(req.params.id);
+
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+
+    if (item.owner.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Not authorized to update this item' });
+    }
+
+    const { name, description, status, location } = req.body;
+
+    if (name) item.name = name;
+    if (description) item.description = description;
+    if (status) item.status = status;
+    if (location) item.location = location;
+
+    if (req.file) {
+      const cloudinaryResult = await cloudinary.uploader.upload(req.file.path);
+      fs.unlinkSync(req.file.path);
+      item.imageUrl = cloudinaryResult.secure_url;
+    }
+
+    await item.save();
+
+    res.status(200).json({ message: 'Item updated successfully', item });
+  } catch (error) {
+    console.error('Error updating item:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
