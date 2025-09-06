@@ -9,30 +9,29 @@ const Auth = () => {
   const navigate = useNavigate();
 
   // ✅ Handle Google login
-  // inside Auth.jsx
-const handleGoogleSuccess = (credentialResponse) => {
-  const token = credentialResponse.credential;
-  const decoded = jwtDecode(token);
+  const handleGoogleSuccess = (credentialResponse) => {
+    const token = credentialResponse.credential;
+    const decoded = jwtDecode(token);
+    console.log("Decoded Google User:", decoded);
 
-  localStorage.setItem("user", JSON.stringify(decoded));
-  localStorage.setItem("isAuthenticated", "true");
+    // Save in localStorage+y
+    localStorage.setItem("user", JSON.stringify(decoded));
+    localStorage.setItem("isAuthenticated", "true");
 
-  setUserInfo(decoded);
-  
-  // ✅ Go directly to user dashboard
-  navigate("/dashboard");
-};
+    setUserInfo(decoded);
+    navigate("/dashboard");
+  };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
+  // ✅ Handle normal login/signup
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  localStorage.setItem("user", JSON.stringify({ email: "test@mail.com" }));
-  localStorage.setItem("isAuthenticated", "true");
+    // Normally you'd verify with backend here
+    localStorage.setItem("user", JSON.stringify({ email: "test@mail.com" }));
+    localStorage.setItem("isAuthenticated", "true");
 
-  // ✅ Go directly to user dashboard
-  navigate("/dashboard");
-};
-
+    navigate("/dashboard");
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-blue-100 p-6">
@@ -92,4 +91,4 @@ const handleSubmit = (e) => {
   );
 };
 
-export default Auth; 
+export default Auth;
