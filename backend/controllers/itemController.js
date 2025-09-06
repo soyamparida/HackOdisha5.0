@@ -113,3 +113,30 @@ export const updateItem = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+// User dashboard - fetch user’s items
+export const getUserItems = async (req, res) => {
+  try {
+    const { page = 1, limit = 10 } = req.query;
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const [items, total] = await Promise.all([
+      Item.find({ owner: req.user.id })
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(Number(limit)),
+      Item.countDocuments({ owner: req.user.id }),
+    ]);
+
+    res.json({
+      items,
+      totalItems: total,
+      currentPage: Number(page),
+      totalPages: Math.ceil(total / Number(limit)),
+    });
+  } catch (err) {
+    console.error('Error fetching user items:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
