@@ -29,7 +29,7 @@ const AdminLogin = () => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-6 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border rounded-md"
           />
           <input
             type="password"
