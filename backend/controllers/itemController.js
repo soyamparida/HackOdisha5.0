@@ -40,3 +40,41 @@ export const getItems = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+//User - upload new item
+export const uploadItem = async (req, res) => {
+  try {
+    const { name, description, status, location, category } = req.body;
+
+    if (!name || !status || !req.file) {
+      return res.status(400).json({ error: 'Missing required fields or image file.' });
+    }
+
+   const uploadResults = await Promise.all(
+      req.files.map(async (file) => {
+        const result = await cloudinary.uploader.upload(file.path);
+        fs.unlinkSync(file.path); // delete local file after upload
+        return result.secure_url;
+      })
+    );
+
+    const newItem = new Item({
+      name,
+      description,
+      status,
+      location,
+      category,
+      imageUrl: uploadResults[0],
+       Id_card:uploadResults[1],
+      owner:req.user._id   //item ownership is taken from the JWT, not user-supplied body
+    });
+
+    await newItem.save();
+
+    res.status(201).json({ message: 'Item uploaded successfully', item: newItem });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to upload item' });
+  }
+};
