@@ -23,7 +23,28 @@ const AdminLogin = () => {
         <h2 className="text-2xl font-bold mb-6 text-center text-indigo-600">
           Admin Login
         </h2>
-        
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full px-4 py-2 border rounded-md"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-2 border rounded-md"
+          />
+          <button 
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition"
+          >
+            Login
+          </button>
+        </form>
       </div>
     </div>
   );
