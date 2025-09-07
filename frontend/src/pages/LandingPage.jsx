@@ -5,12 +5,10 @@ import WhyChooseUs from '../components/WhyChooseUs';
 import CallToAction from '../components/CallToAction';
 import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
-import Header from '../components/Header';
 
 const LandingPage = () => {
   return (
     <div>
-      <Header/>
       <Hero />
       <hr />
       <HowWeWork />

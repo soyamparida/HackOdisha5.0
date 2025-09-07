@@ -92,4 +92,4 @@ const handleSubmit = (e) => {
   );
 };
 
-export default Auth; 
+export default Auth;
